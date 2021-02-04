@@ -13,11 +13,16 @@ class EventList(APIView):
     List all Events, or create a new Events.
     """
     def get(self, request, format=None): #function to list all Events
-        #evento=Evento.objects.filter(id)
-        evento = Evento.objects.all()
-        serializer = EventoSerializer(evento, many=True)
-        return Response(serializer.data)
-
+        data=[]
+        eventos = Evento.objects.all()
+        for evento in eventos:
+            data.append({'hotel_owner':evento.hotel_owner.id,
+            'Nomehotel':evento.hotel_owner.nome,
+            'title':evento.title,'content':evento.content,
+            'data':evento.data,
+            'data_do_evento':evento.data_do_evento})
+        return Response(data)
+       
     
     #apermission_classes=(IsAuthenticated,)
     #authentication_classes = (TokenAuthentication,)
@@ -33,7 +38,9 @@ class EventList(APIView):
 class EventListHotelPage(APIView):
     """
     List all Events HotelPage
+
     """
+    
     def get_object(self, hotel_owner_id):
         try:
             return Evento.objects.filter(hotel_owner=hotel_owner_id)
@@ -41,14 +48,10 @@ class EventListHotelPage(APIView):
             raise Http404
 
     def get(self,request, hotel_owner_id, format=None): #function to list all Events
-        #evento=Evento.objects.filter(hotel_owner=hotel_owner_id)
-        #hotel_owner=int(request.data['hotel_owner'])
-        #hotel_owner=request.data.get('hotel_owner')
-        #evento = Evento.objects.all()
-        print(type(hotel_owner_id))
-        evento = self.get_object(hotel_owner_id)
-        serializer = EventoSerializer(evento, many=True)
+        eventos = self.get_object(hotel_owner_id)
+        serializer = EventoSerializer(eventos, many=True)
         return Response(serializer.data)
+        
 
 class EventDetail(APIView):
     """
@@ -63,7 +66,6 @@ class EventDetail(APIView):
     def get(self, request, pk, format=None): #fncution to Retrieve a Event instance
         evento = self.get_object(pk)
         data1=request.data.get('id','0')
-    
         serializer = EventoSerializer(evento)
         return Response(serializer.data)
 

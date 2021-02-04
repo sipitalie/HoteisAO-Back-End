@@ -22,7 +22,8 @@ class Eventolembret(models.Model):
     """
     evento=models.ForeignKey(Evento, on_delete=models.CASCADE)
     data=models.DateField(auto_now_add=True)
-    UserLembrete = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    UserLembrete = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+   
     
     def __str__(self):
         return self.evento.title
