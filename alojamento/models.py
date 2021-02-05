@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 #from ImagensPerfil.models import Imagens
 
 #tipo
@@ -33,9 +35,23 @@ class Alojamento (models.Model):
     latitude=models.FloatField()
     longitude=models.FloatField()
     foto=models.ImageField(upload_to=uploud_image,null=True, blank=True)
+    
    
     def __str__(self):
         return self.nome
 
+class ContactsSchedule(models.Model):#contactos e horarios de serviços
+    hotel=models.OneToOneField(Alojamento, on_delete=models.CASCADE)
+    phone=models.CharField(max_length=15)
+    email=models.EmailField(max_length=254)
+    whatsApp=models.CharField(max_length=15, null=True, blank=True)
+    LinkedIn=models.CharField(max_length=254, null=True, blank=True)
+    rec_in=models.TimeField(auto_now=False, auto_now_add=False)
+    rec_out=models.TimeField(auto_now=False, auto_now_add=False)
 
+    def __str__(self):
+        return self.email
 
+@receiver(post_save, sender=Alojamento)
+def save_cantactsSchedule(sender, instance, **kwargs):
+    ...

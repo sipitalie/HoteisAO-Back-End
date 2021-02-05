@@ -16,11 +16,11 @@ class EventList(APIView):
         data=[]
         eventos = Evento.objects.all()
         for evento in eventos:
-            data.append({'hotel_owner':evento.hotel_owner.id,
-            'Nomehotel':evento.hotel_owner.nome,
-            'title':evento.title,'content':evento.content,
-            'data':evento.data,
-            'data_do_evento':evento.data_do_evento})
+            data.append({
+                'id':evento.id,'hotel_owner':evento.hotel_owner.id,
+                'Nomehotel':evento.hotel_owner.nome,'title':evento.title,
+                'content':evento.content,'data':evento.data,
+                'data_do_evento':evento.data_do_evento})
         return Response(data)
        
     
