@@ -7,8 +7,10 @@ from django.dispatch import receiver
 #tipo
 Type=(('Hotel','Hotel'),
     ('Apart-hotel','Apart-hotel'),
-    ('Residencial/Pensão','Residencial/Pensão'),
-    ('Resort/Lodge','Resort/Lodge'),
+    ('Residencial','Residencial'),
+    ('Pensão','Pensão'),
+    ('Lodge','Lodge'),
+    ('Resort','Resort'),
     ('Outros', 'Outros')
 )
 #E quanto às classificações?
