@@ -25,7 +25,7 @@ status_quarto=(
 class Quarto(models.Model):
     hotel_owner=models.ForeignKey(Alojamento, on_delete=models.CASCADE)
     Numero_do_quarto=models.IntegerField()
-    Status=models.CharField(choices=status_quarto, max_length=10)
+    Status=models.CharField(choices=status_quarto, max_length=10,default='Disponivel')
     Caract_bedroom=models.CharField(choices=Caracterizacao, max_length=10)
     type_bedroom= models.CharField(choices=type_quarto, max_length=20)
     data_de_criacao=models.DateField(auto_now_add=True)
