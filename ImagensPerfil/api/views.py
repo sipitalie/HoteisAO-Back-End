@@ -13,7 +13,7 @@ class GetImgGallery(APIView):
         return Response(serializer.data)
 class UploadImg(APIView):
     def post(self, request, format=None):
-        print(request.data)
+        
         serializer=ImgSerializer(data=request.data)
         if serializer.is_valid():
             Gallery=serializer.save()
@@ -21,10 +21,12 @@ class UploadImg(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class ImgDelete(APIView):
-    def delete(self, request, format=None):
-        print(request.data)
-        serializer=ImgSerializer(data=request.data)
-        if serializer.is_valid():
-            Gallery=serializer.delete()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def get_object(self, pk):
+        try:
+            return Gallery.objects.get(pk=pk)
+        except Gallery.DoesNotExist:
+            raise Http404
+    def delete(self,request,pk,format=None):
+        gallery = self.get_object(pk)
+        gallery.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -28,9 +28,10 @@ class QuartoCreate(APIView):
     """
     Class to create a new bedroom.
     """
-    #permission_classes=(IsAuthenticated,)
-    #authentication_classes = (TokenAuthentication,)
+    permission_classes=(IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
     def post(self, request, format=None): #function to create a bedroom
+        print(request.data)
         serializer=QuartoSerializer(data=request.data)
         if serializer.is_valid():
             Quarto=serializer.save()
@@ -44,8 +45,8 @@ class QuartoDetail(APIView):
     """
     class to update or delete an bedroom instance.
     """
-    #permission_classes=(IsAuthenticated,)
-    #authentication_classes = (TokenAuthentication,)
+    permission_classes=(IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
     def get_object(self, pk):
         try:
             return Quarto.objects.get(pk=pk)
