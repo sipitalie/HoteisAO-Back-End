@@ -7,8 +7,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.http import Http404
+from rest_framework import filters
 #from rest_framework.authtoken.models import Token
-from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import UpdateAPIView,ListAPIView
 from rest_framework import status
 
 
@@ -21,6 +22,13 @@ def alojamentos(request):
         alojamentos = Alojamento.objects.all()
         serializer = AlojamentoSerializer(alojamentos, many=True)
         return Response(serializer.data)
+
+class AlojamentoListView(ListAPIView):
+    queryset = Alojamento.objects.all()
+    serializer_class = AlojamentoSerializer
+    filter_backends = [filters.OrderingFilter]
+    search_fields = ['nome', 'Type_Alojamento','cidade']
+    #ordering = ['nome']
 
 class AlojamentoCreate(APIView):
 

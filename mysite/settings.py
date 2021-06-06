@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'corsheaders',
+    'django_filters',
     'alojamento',
     'eventos',
     'avaliacao',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'reclamacoes',
     'ImagensPerfil',
     'seguir',
+    
     'Notify.apps.NotifyConfig',
 ]
 
@@ -55,6 +57,11 @@ REST_FRAMEWORK = {
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
+}
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }
 
 

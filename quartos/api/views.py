@@ -35,9 +35,7 @@ class QuartoCreate(APIView):
         serializer=QuartoSerializer(data=request.data)
         if serializer.is_valid():
             Quarto=serializer.save()
-            data={}
-            data["Response"]="registro salvo com sucesso"
-            return Response(data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
