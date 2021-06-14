@@ -26,7 +26,7 @@ def alojamentos(request):
 class AlojamentoListView(ListAPIView):
     queryset = Alojamento.objects.all()
     serializer_class = AlojamentoSerializer
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [filters.SearchFilter,filters.OrderingFilter]
     search_fields = ['nome', 'Type_Alojamento','cidade']
     #ordering = ['nome']
 

@@ -8,7 +8,7 @@ urlpatterns = [
     path('alojamentos/',  alojamentos),
     path('alojamentos/<int:pk>/',AlojamentoDetail.as_view()),
     path('alojamentos/register', AlojamentoCreate.as_view(), name="register"),
-    path('filter/$', AlojamentoListView.as_view()) ,
+    path('filter', AlojamentoListView.as_view()) ,
     
 ]
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

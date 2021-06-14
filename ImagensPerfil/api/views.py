@@ -9,7 +9,7 @@ class GetImgGallery(APIView):
     def get(self, request, quarto_id): 
         Img = Gallery.objects.filter(quarto=quarto_id)
         #Img = Gallery.objects.all()#.select_related('quarto')
-        print
+        #print
         serializer = ImgSerializer(Img , many=True)
         return Response(serializer.data)
 class UploadImg(APIView):
