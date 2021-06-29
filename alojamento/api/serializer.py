@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from alojamento.models import Alojamento
+from alojamento.models import Alojamento, AlojamentoViewsCount, ContactsSchedule
 
 
 
@@ -20,3 +20,8 @@ class AlojamentoSerializer(serializers.ModelSerializer):
         #end=Imagens.objects.create(**imgs)
         #alojamento.imgs=end
         #return alojamento
+class AlojamentoContactsScheduleSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model =ContactsSchedule
+        fields='__all__'

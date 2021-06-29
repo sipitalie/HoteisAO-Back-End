@@ -81,7 +81,6 @@ class FollowOnFollow(APIView):
         except Seguir.DoesNotExist:
             return None
 
-        print(a_seguir)
         if a_seguir !=None and len( a_seguir)!=0 :
             return a_seguir
     def get_seguidores_hotel(self, hotel):

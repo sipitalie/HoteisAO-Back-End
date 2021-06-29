@@ -21,7 +21,7 @@ class QuartoList(APIView):
         #hotel_owner=request.data['hotel_owner']
         bedrooms=self.get_owner(hotel_owner_id)
         serializer = QuartoSerializer(bedrooms, many=True)
-        print(serializer.data)
+        #print(serializer.data)
         return Response(serializer.data)
 
 class QuartoCreate(APIView):
@@ -31,7 +31,7 @@ class QuartoCreate(APIView):
     permission_classes=(IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
     def post(self, request, format=None): #function to create a bedroom
-        print(request.data)
+        #print(request.data)
         serializer=QuartoSerializer(data=request.data)
         if serializer.is_valid():
             Quarto=serializer.save()
@@ -50,6 +50,10 @@ class QuartoDetail(APIView):
             return Quarto.objects.get(pk=pk)
         except Quarto.DoesNotExist:
             raise Http404
+    def get(self, request, pk, format=None): 
+        bedrooms = self.get_object(pk)
+        serializer = QuartoSerializer(bedrooms)
+        return Response(serializer.data)
 
     def put(self, request, pk, format=None): #function to update a bedroom instance
         bedroom = self.get_object(pk)

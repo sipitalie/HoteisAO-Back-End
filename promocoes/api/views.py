@@ -36,7 +36,7 @@ class PromoListHotelPage(APIView):
     List all Promo HotelPage
     """
     def get(self, request,hotel_owner_id,format=None): #function to list all Events
-        print(type(hotel_owner_id))
+        #print(type(hotel_owner_id))
         promo=Promocao.objects.filter(hotel=hotel_owner_id)
         serializer = PromocaoSerializer(promo, many=True)
         return Response(serializer.data)
@@ -56,7 +56,10 @@ class PromotionDetail(APIView):
     
 
     def get(self, request, pk, format=None): #fncution to Retrieve a promotion instance
+
         promotion = self.get_object(pk)
+        #for i in promotion:
+        #    print(i)
         serializer = PromocaoSerializer(promotion)
         return Response(serializer.data)
 

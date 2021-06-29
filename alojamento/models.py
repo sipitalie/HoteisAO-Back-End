@@ -57,3 +57,13 @@ class ContactsSchedule(models.Model):#contactos e horarios de serviços
 @receiver(post_save, sender=Alojamento)
 def save_cantactsSchedule(sender, instance, **kwargs):
     ...
+
+
+class AlojamentoViewsCount(models.Model):
+    hotel=models.ForeignKey(Alojamento, on_delete=models.CASCADE)
+    user_view_ip=models.CharField(max_length=20, null=True, blank=True)
+    data_view=models.DateField(auto_now_add=True)
+    def __str__(self):
+        return self.id
+
+    
