@@ -45,7 +45,7 @@ class AlojamentoViewsContactsSchedule(APIView):
     
     def put(self, request, idhotel, format=None): #function to update a bedroom instance
         contactos = self.get_object(idhotel)
-        serializer =  AlojamentoContactsScheduleSerializer(acontactos, data=request.data)
+        serializer =  AlojamentoContactsScheduleSerializer(contactos, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
